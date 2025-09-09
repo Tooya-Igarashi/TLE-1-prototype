@@ -71,7 +71,7 @@
         });
     });
 </script>
-
+<!--moet nog in css style gezet worden -->
 <style>
     .tab-content { display: none; }
     .tab-content.is-active { display: block; }
