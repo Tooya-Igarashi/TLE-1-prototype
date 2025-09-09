@@ -29,8 +29,16 @@
                 <thead><tr><th>Tijd</th><th>Hartslag (BPM)</th></tr></thead>
                 <tbody><tr><td>08:00</td><td>72</td></tr></tbody>
             </table>
-            <h2>Delen met arts</h2>
+            <div>
+                <h3>Delen met arts</h3>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
+
 
         <div id="brain" class="tab-content">
             <h2 class="subtitle">Brain Activity Monitor</h2>
@@ -38,6 +46,14 @@
                 <thead><tr><th>Tijd</th><th>EEG Niveau</th></tr></thead>
                 <tbody><tr><td>08:00</td><td>Alpha</td></tr></tbody>
             </table>
+            <div>
+                <h3>Delen met arts</h3>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
 
         <div id="glucose" class="tab-content">
@@ -46,6 +62,14 @@
                 <thead><tr><th>Tijd</th><th>Glucose (mg/dL)</th></tr></thead>
                 <tbody><tr><td>08:00</td><td>95</td></tr></tbody>
             </table>
+            <div>
+                <h3>Delen met arts</h3>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
 
         <div id="vital" class="tab-content">
@@ -54,6 +78,14 @@
                 <thead><tr><th>Tijd</th><th>Temperatuur</th><th>Bloeddruk</th></tr></thead>
                 <tbody><tr><td>08:00</td><td>36.8°C</td><td>120/80</td></tr></tbody>
             </table>
+            <div>
+                <h3>Delen met arts</h3>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
     </div>
 </section>
@@ -77,6 +109,69 @@
 <style>
     .tab-content { display: none; }
     .tab-content.is-active { display: block; }
+
+    /* The switch - the box around the slider */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
 </style>
 </body>
 </html>
