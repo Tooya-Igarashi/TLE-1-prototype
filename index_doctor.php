@@ -39,8 +39,6 @@ mysqli_close($db);
 </header>
 <main class="container">
     <section class="section">
-        <a class="button mt-4" href="create.php">Create new game list</a>
-
         <table class="table mx-auto">
             <thead>
             <tr>
@@ -48,11 +46,6 @@ mysqli_close($db);
                 <th>Naam</th>
                 <th>Lengte</th>
                 <th>Gewicht</th>
-                <th>Bloeddruk</th>
-                <th>Hartslag</th>
-                <th>Bloed suiker</th>
-                <th>Symptomen</th>
-                <th>Notities</th>
                 <th>Details</th>
             </tr>
             </thead>
@@ -69,11 +62,6 @@ mysqli_close($db);
                     <td> <?=htmlentities($healthy['name'])?> </td>
                     <td> <?=htmlentities($healthy['height'])?> </td>
                     <td> <?=htmlentities($healthy['weight'])?> </td>
-                    <td> <?=htmlentities($healthy['blood_pressure'])?>H </td>
-                    <td> <?=htmlentities($healthy['heart_rate'])?> </td>
-                    <td> <?=htmlentities($healthy['blood_sugar'])?> </td>
-                    <td> <?=htmlentities($healthy['symptoms'])?> </td>
-                    <td> <?=htmlentities($healthy['notes'])?> </td>
                     <td> <a href="details.php?id=<?=$healthy['id']?>">Details</a> </td>
                 </tr>
             <?php }?>
