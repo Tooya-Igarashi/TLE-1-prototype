@@ -1,5 +1,26 @@
-<!--test test test test test-->
+<?php
+session_start();
 
+if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+    exit();
+}
+
+global $db;
+require_once 'includes/connection.php';
+
+if (isset($_POST['submit'])) {
+    $heart = isset($_POST['heart']) ? 1 : 0;
+    $brain = isset($_POST['brain']) ? 1 : 0;
+    $glucose = isset($_POST['glucose']) ? 1 : 0;
+    $vital = isset($_POST['vital']) ? 1 : 0;
+
+    $query = "UPDATE `permission` SET
+        `heart`='$heart', `brain`='$brain', `glucose`='$glucose', `vital`='$vital'
+        WHERE `user_id` = 2";
+    mysqli_query($db, $query);
+}
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -10,6 +31,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
+    <a href="index_doctor.php"><button class="button is-light" onclick=>
+            <span class="icon">←</span>
+            <span>Terug naar vorige pagina</span>
+        </button></a>
+    <form action="" method="post">
     <section class="section">
         <div class="container">
             <h1 class="title has-text-centered">🩺 Patiëntenmonitor Dashboard</h1>
@@ -41,9 +67,10 @@
                 <div>
                     <h3>Delen met arts</h3>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" name="heart" value="1" <?= isset($_POST['heart']) ? 'checked' : '' ?>>
                         <span class="slider round"></span>
                     </label>
+                    <button class="button" type="submit" name="submit">Opslaan</button>
                 </div>
             </div>
 
@@ -63,9 +90,12 @@
                 <div>
                     <h3>Delen met arts</h3>
                     <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
+                        <label class="switch">
+                            <input type="checkbox" name="brain" value="1" <?= isset($_POST['brain']) ? 'checked' : '' ?>>
+                            <span class="slider round"></span>
+                        </label>
                     </label>
+                    <button class="button" type="submit" name="submit">Opslaan</button>
                 </div>
             </div>
 
@@ -85,9 +115,10 @@
                 <div>
                     <h3>Delen met arts</h3>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" name="glucose" value="1" <?= isset($_POST['glucose']) ? 'checked' : '' ?>>
                         <span class="slider round"></span>
                     </label>
+                    <button class="button" type="submit" name="submit">Opslaan</button>
                 </div>
             </div>
 
@@ -107,15 +138,50 @@
                 <div>
                     <h3>Delen met arts</h3>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" name="vital" value="1" <?= isset($_POST['vital']) ? 'checked' : '' ?>>
                         <span class="slider round"></span>
                     </label>
+                    <button class="button" type="submit" name="submit">Opslaan</button>
                 </div>
             </div>
         </div>
     </section>
+    </form>
 
     <script>
+        document.querySelectorAll('.switch input[type="checkbox"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const type = this.closest('.tab-content').id;
+                const checked = this.checked;
+
+                if (type === 'heart') {
+                    if (checked) {
+                        <?= $heart = 1; ?>
+                    } else {
+                        <?= $heart = 0; ?>
+                    }
+                } else if (type === 'brain') {
+                    if (checked) {
+                        <?= $brain = 1; ?>
+                    } else {
+                        <?= $brain = 0; ?>
+                    }
+                } else if (type === 'glucose') {
+                    if (checked) {
+                        <?= $glucose = 1; ?>
+                    } else {
+                        <?= $glucose = 0; ?>
+                    }
+                } else if (type === 'vital') {
+                    if (checked) {
+                        <?= $vital = 1; ?>
+                    } else {
+                        <?= $vital = 0; ?>
+                    }
+                }
+            });
+        });
+
         // Chart configurations for each tab
         const chartConfigs = {
             heart: {
@@ -283,10 +349,17 @@
 
         // Toggle switch functionality
         document.querySelectorAll('.switch input').forEach(input => {
-            input.addEventListener('change', () => {
-                alert("Gegevens gedeeld met arts.");
+            input.addEventListener('change', function() {
+                const type = this.closest('.tab-content').id;
+                const value = this.checked ? 1 : 0;
+                fetch('update_permission.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: `type=${type}&value=${value}`
+                });
             });
         });
+
 
         // Initialize charts when page loads
         document.addEventListener('DOMContentLoaded', initCharts);
