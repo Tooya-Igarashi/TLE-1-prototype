@@ -1,116 +1,171 @@
-<!--test test test test test-->
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patiëntenmonitor</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 <body>
+
+<!-- Navbar -->
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+            <!-- Hier kan je logo of tekst -->
+            <strong>BetterLifeMedical</strong>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasic" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="#">Home</a>
+            <a class="navbar-item" href="#">Overzicht</a>
+            <a class="navbar-item" href="#">Instellingen</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Pagina titel -->
 <section class="section">
     <div class="container">
-        <h1 class="title has-text-centered">🩺 Patiëntenmonitor Dashboard</h1>
+        <h1 class="title has-text-centered">Patiëntenmonitor Dashboard</h1>
+    </div>
+</section>
 
-        <!-- Tabs -->
-        <div class="tabs is-centered is-boxed is-large">
-            <ul>
-                <li class="is-active" data-tab="heart"><a>❤️ Heart Rate</a></li>
-                <li data-tab="brain"><a>🧠 Brain Activity</a></li>
-                <li data-tab="glucose"><a>🩸 Glucose</a></li>
-                <li data-tab="vital"><a>🌡️ Vital Signs</a></li>
-            </ul>
-        </div>
-
-        <!-- Tab Content -->
-        <div id="heart" class="tab-content is-active">
-            <h2 class="subtitle">Heart Rate Monitor</h2>
-            <table class="table is-striped is-fullwidth">
-                <canvas id="heartChart" width="400" height="200"></canvas>
-                <thead><tr><th>Tijd</th><th>Hartslag (BPM)</th></tr></thead>
-                <tbody><tr><td>08:00</td><td>72</td></tr></tbody>
-            </table>
-            <div>
+<div class="container mt-5 mb-5">
+    <div class="columns is-multiline">
+        <!-- Heart Rate Monitor -->
+        <div class="column is-one-quarter-desktop is-full-mobile mb-5">
+            <div class="box">
+                <h2 class="subtitle">❤️ Heart Rate Monitor</h2>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="heartChart"></canvas>
+                </div>
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                    <tr><th>Tijd</th><th>Hartslag (BPM)</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>08:00</td><td>72</td></tr>
+                    </tbody>
+                </table>
                 <h3>Delen met arts</h3>
-                <!-- Rounded switch -->
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" />
                     <span class="slider round"></span>
                 </label>
             </div>
         </div>
 
-
-        <div id="brain" class="tab-content">
-            <h2 class="subtitle">Brain Activity Monitor</h2>
-            <table class="table is-striped is-fullwidth">
-                <thead><tr><th>Tijd</th><th>EEG Niveau</th></tr></thead>
-                <tbody><tr><td>08:00</td><td>Alpha</td></tr></tbody>
-            </table>
-            <div>
-                <h3>Delen met arts</h3>
-                <!-- Rounded switch -->
+        <!-- Brain Activity Monitor -->
+        <div class="column is-one-quarter-desktop is-full-mobile mb-5">
+            <div class="box">
+                <h2 class="subtitle">🧠 Brain Activity Monitor</h2>
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                    <tr><th>Tijd</th><th>EEG Niveau</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>08:00</td><td>Alpha</td></tr>
+                    </tbody>
+                </table>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" />
                     <span class="slider round"></span>
                 </label>
             </div>
         </div>
 
-        <div id="glucose" class="tab-content">
-            <h2 class="subtitle">Glucose Monitor</h2>
-            <table class="table is-striped is-fullwidth">
-                <thead><tr><th>Tijd</th><th>Glucose (mg/dL)</th></tr></thead>
-                <tbody><tr><td>08:00</td><td>95</td></tr></tbody>
-            </table>
-            <div>
-                <h3>Delen met arts</h3>
-                <!-- Rounded switch -->
+        <!-- Glucose Monitor -->
+        <div class="column is-one-quarter-desktop is-full-mobile mb-5">
+            <div class="box">
+                <h2 class="subtitle">🩸 Glucose Monitor</h2>
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                    <tr><th>Tijd</th><th>Glucose (mg/dL)</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>08:00</td><td>95</td></tr>
+                    </tbody>
+                </table>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" />
                     <span class="slider round"></span>
                 </label>
             </div>
         </div>
 
-        <div id="vital" class="tab-content">
-            <h2 class="subtitle">Vital Sign Monitor</h2>
-            <table class="table is-striped is-fullwidth">
-                <thead><tr><th>Tijd</th><th>Temperatuur</th><th>Bloeddruk</th></tr></thead>
-                <tbody><tr><td>08:00</td><td>36.8°C</td><td>120/80</td></tr></tbody>
-            </table>
-            <div>
-                <h3>Delen met arts</h3>
-                <!-- Rounded switch -->
+        <!-- Vital Sign Monitor -->
+        <div class="column is-one-quarter-desktop is-full-mobile mb-5">
+            <div class="box">
+                <h2 class="subtitle">🌡️ Vital Sign Monitor</h2>
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                    <tr><th>Tijd</th><th>Temperatuur</th><th>Bloeddruk</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>08:00</td><td>36.8°C</td><td>120/80</td></tr>
+                    </tbody>
+                </table>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" />
                     <span class="slider round"></span>
                 </label>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- Simple JS to switch tabs -->
 <script>
-    // dit zijn de tabellen van hart, brain , glucose en vital sign
-    const tabs = document.querySelectorAll(".tabs ul li");
-    const contents = document.querySelectorAll(".tab-content");
 
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            tabs.forEach(t => t.classList.remove("is-active"));
-            tab.classList.add("is-active");
+    fetch('/heart-rate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tijd: '08:00', bpm: 72 })
+    });
 
-            contents.forEach(c => c.classList.remove("is-active"));
-            document.getElementById(tab.dataset.tab).classList.add("is-active");
+    const express = require('express');
+    const mysql = require('mysql2');
+    const app = express();
+    app.use(express.json());
+
+    const db = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'patient_monitor'
+    });
+
+    app.post('/heart-rate', (req, res) => {
+        const { tijd, bpm } = req.body;
+        db.query('INSERT INTO heart_rate (tijd, bpm) VALUES (?, ?)', [tijd, bpm], (err) => {
+            if (err) return res.status(500).send(err);
+            res.send('Data opgeslagen');
         });
     });
 
-    // dit is een heart chart en het meet je hartslag
+    app.listen(3000, () => console.log('Server draait op poort 3000'));
+
+    // Navbar burger toggle voor mobiel
+    document.addEventListener('DOMContentLoaded', () => {
+        const burger = document.querySelector('.navbar-burger');
+        const menu = document.getElementById('navbarBasic');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('is-active');
+            menu.classList.toggle('is-active');
+        });
+    });
+
+    // Chart.js setup voor Heart Rate Monitor
     const ctx = document.getElementById('heartChart').getContext('2d');
     const heartChart = new Chart(ctx, {
         type: 'line',
@@ -128,6 +183,7 @@
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 y: {
                     beginAtZero: false,
@@ -138,15 +194,12 @@
         }
     });
 
-// dit is die toggle switch of je gegevens wilt delen met de arts
+    // Toggle switch alert
     document.querySelectorAll('.switch input').forEach(input => {
         input.addEventListener('change', () => {
             alert("Gegevens gedeeld met arts.");
         });
     });
-
 </script>
-
 </body>
 </html>
-
